@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
-    private float facingDirection = 1f; // 1 = right, -1 = left
+    public float facingDirection = 1f; // 1 = right, -1 = left
     private bool isGrounded;
 
     [Header("Ground Check")]
