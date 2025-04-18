@@ -13,6 +13,18 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void SettingsClicked()
+    {
+        settings.SetActive(true);
+        main.SetActive(false);
+    }
+
+        public void SettingsUnclicked()
+    {
+        settings.SetActive(false);
+        main.SetActive(true);
+    }
+
     public void CreditsClicked()
     {
         credits.SetActive(true);
