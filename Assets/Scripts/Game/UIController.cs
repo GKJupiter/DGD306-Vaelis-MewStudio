@@ -7,6 +7,8 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject main;
     [SerializeField] private GameObject credits;
+    [SerializeField] private GameObject settings;
+    
 
     public void PlayCLicked()
     {
