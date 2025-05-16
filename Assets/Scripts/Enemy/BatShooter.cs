@@ -9,6 +9,15 @@ public class BatShooter : MonoBehaviour
     public float shootAngleRange = 20f;
     private float nextFireTime = 0f;
 
+    [SerializeField] Transform player;
+
+    private bool facingRight = false;
+
+    void FixedUpdate()
+    {
+        FlipTowardsPlayer();
+    }
+
     void Update()
     {
         if (Time.time >= nextFireTime)
@@ -33,5 +42,24 @@ public class BatShooter : MonoBehaviour
         {
             rb.velocity = direction * bulletSpeed;
         }
+    }
+
+    void FlipTowardsPlayer()
+    {
+        float distanceFromPlayer = player.position.x - transform.position.x;
+        if (distanceFromPlayer < 0 && facingRight)
+        {
+            Flip();
+        }
+        else if (distanceFromPlayer > 0 && !facingRight)
+        {
+            Flip();
+        }
+    }
+
+    void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
     }
 }

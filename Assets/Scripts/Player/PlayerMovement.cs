@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float facingDirection = 1f; // 1 = right, -1 = left
     private bool isGrounded;
 
+    Animator animator;
+
     [Header("Ground Check")]
     public GameObject groundCheck; // Assign the GroundCheck child object here
     private int groundCounter = 0; // Tracks the number of ground touches
@@ -17,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
