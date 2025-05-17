@@ -740,7 +740,10 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  jumpHeight: 7
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  jumpHeight: 8
   player: {fileID: 959624429}
   groundCheck: {fileID: 1304688788}
   boxSize: {x: 1, y: 0.2}
@@ -809,7 +812,7 @@ Transform:
   m_GameObject: {fileID: 303908296}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.4, y: -20.446, z: 0}
+  m_LocalPosition: {x: 5.52, y: -20.446, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -962,7 +965,7 @@ Transform:
   m_GameObject: {fileID: 313879313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.879, y: 0, z: 0}
+  m_LocalPosition: {x: 1.033, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2134,7 +2137,7 @@ Transform:
   m_GameObject: {fileID: 805458627}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.879, y: 0, z: 0}
+  m_LocalPosition: {x: 1.021, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2525,6 +2528,7 @@ GameObject:
   - component: {fileID: 1004170510}
   - component: {fileID: 1004170509}
   - component: {fileID: 1004170508}
+  - component: {fileID: 1004170515}
   m_Layer: 8
   m_Name: SlimeBlue (1)
   m_TagString: Enemy
@@ -2577,7 +2581,10 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  jumpHeight: 7
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  jumpHeight: 8
   player: {fileID: 959624429}
   groundCheck: {fileID: 911305281}
   boxSize: {x: 1, y: 0.2}
@@ -2718,7 +2725,7 @@ Transform:
   m_GameObject: {fileID: 1004170507}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.58, y: -20.446, z: 0}
+  m_LocalPosition: {x: -17.66, y: -20.446, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2727,6 +2734,27 @@ Transform:
   - {fileID: 911305281}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1004170515
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004170507}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 23a7bd7dd0eefed41987b5448c83ad09, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1091107746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,7 +2811,7 @@ Transform:
   m_GameObject: {fileID: 1119558131}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.869, y: -0.825, z: 0}
+  m_LocalPosition: {x: 1.052, y: -0.825, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2869,9 +2897,9 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0.1
+  m_YDamping: 0.1
+  m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.696
@@ -3392,7 +3420,7 @@ Transform:
   m_GameObject: {fileID: 1988289935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.869, y: -0.825, z: 0}
+  m_LocalPosition: {x: 0.982, y: -0.825, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
