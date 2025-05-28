@@ -33,6 +33,14 @@ public class PlayerShooting : MonoBehaviour
 
         // Get player's facing direction from PlayerMovement
         float direction = playerMovement != null ? playerMovement.facingDirection : 1f;
-        rb.velocity = new Vector2(direction * projectileSpeed, 0);
+
+        if (playerMovement.facingDirection > 0)
+        {
+            rb.velocity = firePoint.right * projectileSpeed;
+        }
+        if (playerMovement.facingDirection < 0)
+        {
+            rb.velocity = -firePoint.right * projectileSpeed;
+        }
     }
 }

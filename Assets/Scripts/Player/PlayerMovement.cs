@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 10f;
     public float facingDirection = 1f; // 1 = right, -1 = left
     private bool isGrounded;
+    private bool isStill;
+    public Transform firePoint;
 
     Animator animator;
 
@@ -30,12 +32,20 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Still();
         Walk();
         Jump();
+        FirePointDirection();
     }
 
     private void Walk()
     {
+        if (isStill)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            return;
+        }
+
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
@@ -48,11 +58,12 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateRotation()
     {
-        if (facingDirection > 0)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        else if (facingDirection < 0)
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            if (facingDirection > 0)
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            else if (facingDirection < 0)
+                transform.rotation = Quaternion.Euler(0, -180, 0);
     }
+
 
     private void Jump()
     {
@@ -64,6 +75,42 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
+    }
+
+    private void FirePointDirection()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
+            {
+                // Diagonal up while walking
+                firePoint.localRotation = Quaternion.Euler(0, 0, facingDirection > 0 ? 45 : 225);
+            }
+            else
+            {
+                // Looking straight up
+                firePoint.localRotation = Quaternion.Euler(0, 0, facingDirection > 0 ? 90 : -90);
+            }
+        }
+        else
+        {
+            // Horizontal aiming
+            firePoint.localRotation = Quaternion.Euler(0, 0, facingDirection > 0 ? 0 : 180);
+        }
+    }
+
+
+
+    private void Still()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            isStill = true;
+        }
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            isStill = false;
         }
     }
 
