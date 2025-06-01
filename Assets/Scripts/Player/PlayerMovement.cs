@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
+        animator.SetFloat("yVelocity", rb.velocity.y);
+
     }
 
     void Update()
@@ -71,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             isGrounded = false;
+            animator.SetBool("isJumping", !isGrounded);
         }
         if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
         {
@@ -121,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
         {
             groundCounter++;
             isGrounded = true;
+            animator.SetBool("isJumping", !isGrounded);
         }
     }
 

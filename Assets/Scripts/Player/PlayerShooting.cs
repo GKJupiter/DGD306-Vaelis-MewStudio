@@ -9,12 +9,15 @@ public class PlayerShooting : MonoBehaviour
     public float projectileSpeed = 10f;
     public float fireRate = 0.2f; // Delay between shots
     private float nextFireTime = 0f;
+    private bool isShooting;
 
     private PlayerMovement playerMovement;
+    Animator animator;
 
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>(); // Get reference to player movement
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -23,11 +26,17 @@ public class PlayerShooting : MonoBehaviour
         {
             Shoot();
             nextFireTime = Time.time + fireRate;
+
+        }
+        else
+        {
+            isShooting = false;
         }
     }
 
     void Shoot()
     {
+        isShooting=true;
         GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
 
