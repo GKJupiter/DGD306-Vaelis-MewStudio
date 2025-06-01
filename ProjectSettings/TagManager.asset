@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: lighting
+    uniqueID: 3806226375
+    locked: 0
