@@ -1,23 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
-    public float facingDirection = 1f; // 1 = right, -1 = left
+    public float facingDirection = 1f;
     private bool isGrounded;
     private bool isStill;
     public Transform firePoint;
+    public int playerId = 1; // 1 for P1, 2 for P2
 
     Animator animator;
-
-    [Header("Ground Check")]
-    public GameObject groundCheck; // Assign the GroundCheck child object here
-    private int groundCounter = 0; // Tracks the number of ground touches
+    public GameObject groundCheck;
+    private int groundCounter = 0;
 
     void Start()
     {
@@ -27,9 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
+        animator.SetFloat("xVelocity", Mathf.Abs(rb.velocity.x));
         animator.SetFloat("yVelocity", rb.velocity.y);
-
     }
 
     void Update()
@@ -48,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        float moveInput = Input.GetAxisRaw($"Horizontal_P{playerId}");
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
         if (moveInput != 0)
@@ -60,22 +56,19 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateRotation()
     {
-            if (facingDirection > 0)
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            else if (facingDirection < 0)
-                transform.rotation = Quaternion.Euler(0, -180, 0);
+        transform.rotation = Quaternion.Euler(0, facingDirection > 0 ? 0 : 180, 0);
     }
-
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetButtonDown($"Jump_P{playerId}") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             isGrounded = false;
-            animator.SetBool("isJumping", !isGrounded);
+            animator.SetBool("isJumping", true);
         }
-        if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
+
+        if (Input.GetButtonUp($"Jump_P{playerId}") && rb.velocity.y > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
@@ -83,48 +76,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void FirePointDirection()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow)) // TODO: Customize per player
         {
-            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.1f)
-            {
-                // Diagonal up while walking
-                firePoint.localRotation = Quaternion.Euler(0, 0, facingDirection > 0 ? 45 : 225);
-            }
-            else
-            {
-                // Looking straight up
-                firePoint.localRotation = Quaternion.Euler(0, 0, facingDirection > 0 ? 90 : -90);
-            }
+            firePoint.localRotation = Quaternion.Euler(0, 0, facingDirection > 0 ? 45 : 225);
         }
         else
         {
-            // Horizontal aiming
             firePoint.localRotation = Quaternion.Euler(0, 0, facingDirection > 0 ? 0 : 180);
         }
     }
 
-
-
     private void Still()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            isStill = true;
-        }
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            isStill = false;
-        }
+        if (Input.GetKeyDown(KeyCode.X)) isStill = true;
+        if (Input.GetKeyUp(KeyCode.X)) isStill = false;
     }
 
-    // Ground Check Using Collider
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             groundCounter++;
             isGrounded = true;
-            animator.SetBool("isJumping", !isGrounded);
+            animator.SetBool("isJumping", false);
         }
     }
 
@@ -133,8 +107,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             groundCounter--;
-            if (groundCounter <= 0)
-                isGrounded = false;
+            if (groundCounter <= 0) isGrounded = false;
         }
     }
 }
