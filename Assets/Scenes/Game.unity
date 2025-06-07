@@ -816,7 +816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b5c805e8c1c8e438e5f4478770d6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 3022159087374944084, guid: e3632ecd8adf7704eb639633cc791d67, type: 3}
+  playerPrefab: {fileID: 5911952615236538072, guid: e3632ecd8adf7704eb639633cc791d67, type: 3}
 --- !u!4 &164705302
 Transform:
   m_ObjectHideFlags: 0
@@ -4333,7 +4333,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &959624434
 BoxCollider2D:
   m_ObjectHideFlags: 0
