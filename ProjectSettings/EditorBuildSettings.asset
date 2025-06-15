@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 00021b34012585f4a9ffdcc6b75d3641
+  - enabled: 1
+    path: Assets/Scenes/Opening Cinematic.unity
+    guid: 277d01d7363c49349bfa12229dd08624
   m_configObjects: {}

@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
 
     public void PlayCLicked()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Opening Cinematic");
     }
 
     public void SettingsClicked()
