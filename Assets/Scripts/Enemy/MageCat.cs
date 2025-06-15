@@ -4,86 +4,112 @@ using UnityEngine;
 
 public class MageCat : MonoBehaviour
 {
-    [SerializeField] Transform player;
+    [SerializeField] Vector2 lineOfSight;
+    [SerializeField] LayerMask playerLayer;
+    private bool canSeePlayer;
 
-    [SerializeField] GameObject groundAttackPrefab;
+    private Transform player;
+    [SerializeField] float attackCooldown = 2f;
+    private float lastAttackTime;
+    [SerializeField] GameObject groundTrapPrefab;
+    [SerializeField] float trapDelay = 0.5f;
 
-    [SerializeField] GameObject magicProjectilePrefab;
+    [SerializeField] GameObject laserPrefab;
+    [SerializeField] Transform firePoint;
+    [SerializeField] float laserSpeed = 10f;
 
-    [SerializeField] GameObject magicRainPrefab;
+    [SerializeField] GameObject rainProjectilePrefab;
+    [SerializeField] int numberOfDrops = 5;
+    [SerializeField] float spreadRange = 5f;
+    [SerializeField] float dropHeight = 6f;
 
-    [SerializeField] Transform attackSpawnPoint;
-
-    [SerializeField] float projectileSpeed;
-    [SerializeField] float groundAttackSpeed;
-
-    float attackCooldown = 3f;
-    float cooldownTimer;
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (player == null)
+        {
+            Debug.LogError("MageCat: Player not found! Make sure your player is tagged as 'Player'");
+        }
+    }
 
     void Update()
     {
-        cooldownTimer -= Time.deltaTime;
-        if (cooldownTimer <= 0f)
+        canSeePlayer = Physics2D.OverlapBox(transform.position, lineOfSight, 0, playerLayer);
+
+        if (canSeePlayer)
         {
-            PerformRandomAttack();
-            cooldownTimer = attackCooldown;
+            // Optional: Face the player
+            AttackLogic();
         }
     }
 
-    void PerformRandomAttack()
+    void AttackLogic()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        if (Time.time - lastAttackTime < attackCooldown) return;
 
-        int randomAttack = Random.Range(0, 3);
-        if (randomAttack == 0 && distanceToPlayer < 5f)
-            GroundAttack();
-        else if (randomAttack == 1)
-            ShootMagicProjectile();
-        else
-            MagicRain();
-    }
+        int randomAttack = Random.Range(0, 3); // 0 - Ground, 1 - Laser, 2 - Rain
 
-    public void MagicRain()
-    {
-        StartCoroutine(SpawnMagicRain());
-    }
-
-    IEnumerator SpawnMagicRain()
-    {
-        float rainWidth = 8f; // how wide the rain area is
-        int rainCount = 10;
-        float spawnHeight = 6f;
-
-        for (int i = 0; i < rainCount; i++)
+        switch (randomAttack)
         {
-            float offsetX = Random.Range(-rainWidth / 2, rainWidth / 2);
-            Vector3 spawnPos = new Vector3(player.position.x + offsetX, player.position.y + spawnHeight, 0f);
+            case 0: StartCoroutine(GroundTrapAttack()); break;
+            case 1: StartCoroutine(LaserAttack()); break;
+            case 2: StartCoroutine(MagicRainAttack()); break;
+        }
 
-            Instantiate(magicRainPrefab, spawnPos, Quaternion.identity);
+        lastAttackTime = Time.time;
+    }
 
-            yield return new WaitForSeconds(0.2f); // small delay between drops
+
+
+    IEnumerator GroundTrapAttack()
+    {
+        if (player == null) yield break;
+
+        Vector3 trapPos = new Vector3(player.position.x, player.position.y - 0.5f, 0);
+        yield return new WaitForSeconds(trapDelay);
+
+        Instantiate(groundTrapPrefab, trapPos, Quaternion.identity);
+    }
+
+
+    IEnumerator LaserAttack()
+    {
+        yield return new WaitForSeconds(0.3f); // Optional delay before firing
+
+        Vector2 dir = (player.position - firePoint.position).normalized;
+        GameObject laser = Instantiate(laserPrefab, firePoint.position, Quaternion.identity);
+        laser.GetComponent<Rigidbody2D>().velocity = dir * laserSpeed;
+    }
+
+
+
+    IEnumerator MagicRainAttack()
+    {
+        if (player == null)
+        {
+            Debug.LogError("MageCat: player reference is null.");
+            yield break;
+        }
+
+        if (rainProjectilePrefab == null)
+        {
+            Debug.LogError("MageCat: rainProjectilePrefab is not assigned!");
+            yield break;
+        }
+
+        for (int i = 0; i < numberOfDrops; i++)
+        {
+            float randomOffset = Random.Range(-spreadRange, spreadRange);
+            Vector3 spawnPos = new Vector3(player.position.x + randomOffset, player.position.y + dropHeight, 0);
+            Instantiate(rainProjectilePrefab, spawnPos, Quaternion.identity);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
-    public void ShootMagicProjectile()
+
+        void OnDrawGizmosSelected()
     {
-        Vector2 direction = (player.position - attackSpawnPoint.position).normalized;
-        GameObject projectile = Instantiate(magicProjectilePrefab, attackSpawnPoint.position, Quaternion.identity);
-
-        projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, lineOfSight);
     }
-
-    public void GroundAttack()
-    {
-        Vector3 spawnPos = transform.position;
-        GameObject groundAttack = Instantiate(groundAttackPrefab, spawnPos, Quaternion.identity);
-        
-        Vector2 direction = (player.position - transform.position).normalized;
-        direction.y = 0f; // make sure it's strictly horizontal
-
-        groundAttack.GetComponent<Rigidbody2D>().velocity = direction * groundAttackSpeed;
-    }
-
-
-
 }
