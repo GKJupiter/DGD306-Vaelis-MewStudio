@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7284770183252949987}
   - component: {fileID: 5082086728591520960}
   - component: {fileID: 4596929939640438357}
+  - component: {fileID: 345753838051323645}
   m_Layer: 8
   m_Name: GroundAttack
   m_TagString: Enemy
@@ -165,3 +166,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217ba73a82559614894315292bcc30b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &345753838051323645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293042409640175261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f8f2190828e854c907af91b5635fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 1
