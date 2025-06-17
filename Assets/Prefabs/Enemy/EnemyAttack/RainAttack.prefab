@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8004956863639243883}
   - component: {fileID: 2297130923162329464}
   - component: {fileID: 8244267506624025342}
-  - component: {fileID: 3974860494928086290}
+  - component: {fileID: -2943046617748850259}
+  - component: {fileID: 4807545551136008362}
   m_Layer: 0
   m_Name: RainAttack
   m_TagString: Untagged
@@ -181,7 +182,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
---- !u!114 &3974860494928086290
+--- !u!114 &-2943046617748850259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,7 +191,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2620448700634441152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2f8f2190828e854c907af91b5635fd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 217ba73a82559614894315292bcc30b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 2
+--- !u!114 &4807545551136008362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620448700634441152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc932710a75b6b344b3413b1c98169bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10

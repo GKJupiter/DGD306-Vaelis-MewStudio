@@ -9,37 +9,70 @@ public class PlayerShooting : MonoBehaviour
     private float nextFireTime = 0f;
 
     private PlayerMovement playerMovement;
-    Animator animator;
+    Animator animator; // Reference to the Animator component
+    private bool isShooting = false; // New boolean for shooting state
 
     public int playerId = 1; // 1 for P1, 2 for P2
 
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); // Get the Animator component
     }
 
     void Update()
     {
         // "Shoot_P{playerId}" corresponds to Gamepad Button West (e.g., 'X' on Xbox, 'Square' on PlayStation)
-        if (Input.GetButton($"Shoot_P{playerId}") && Time.time >= nextFireTime)
+        if (Input.GetButton($"Shoot_P{playerId}"))
         {
-            Shoot();
-            nextFireTime = Time.time + fireRate;
+            if (Time.time >= nextFireTime)
+            {
+                Shoot();
+                nextFireTime = Time.time + fireRate;
+            }
+            if (!isShooting) // Only set the bool if it's currently false
+            {
+                isShooting = true;
+                if (animator != null)
+                {
+                    animator.SetBool("isShooting", true); // Set isShooting bool in Animator
+                }
+            }
+        }
+        else
+        {
+            if (isShooting) // Only set the bool if it's currently true
+            {
+                isShooting = false;
+                if (animator != null)
+                {
+                    animator.SetBool("isShooting", false); // Reset isShooting bool in Animator
+                }
+            }
         }
     }
 
     void Shoot()
     {
-        // Instantiate the projectile at the firePoint's position and rotation
-        // Quaternion.identity means no rotation is applied initially; projectile's velocity will dictate direction
-        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        // Get the current facing direction from PlayerMovement
+        float direction = playerMovement.facingDirection;
+
+        // Calculate the rotation for the projectile based on the player's facing direction
+        Quaternion projectileRotation;
+        if (direction > 0) // Facing right
+        {
+            projectileRotation = Quaternion.Euler(0, 0, 0); // No Z rotation for right-facing
+        }
+        else // Facing left
+        {
+            projectileRotation = Quaternion.Euler(0, 180, 0); // 180 degrees Y-rotation to flip the sprite
+        }
+
+        // Instantiate the projectile at the firePoint's position with the calculated rotation
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, projectileRotation);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
 
-        // Get the current facing direction from PlayerMovement to apply to the projectile
-        float direction = playerMovement.facingDirection;
         // Apply velocity to the projectile based on the firePoint's right vector and player's facing direction
-        // This ensures the projectile shoots in the direction the player is facing/aiming
         rb.velocity = firePoint.right * projectileSpeed * direction;
     }
 }

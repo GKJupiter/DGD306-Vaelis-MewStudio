@@ -4107,10 +4107,10 @@ GameObject:
   - component: {fileID: 434941375}
   - component: {fileID: 434941374}
   - component: {fileID: 434941376}
-  - component: {fileID: 434941378}
   - component: {fileID: 434941377}
-  - component: {fileID: 434941380}
   - component: {fileID: 434941381}
+  - component: {fileID: 434941380}
+  - component: {fileID: 434941378}
   m_Layer: 8
   m_Name: CatMage
   m_TagString: Enemy
@@ -4179,7 +4179,7 @@ Transform:
   m_GameObject: {fileID: 434941373}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.62, y: -40.45, z: 0}
+  m_LocalPosition: {x: 0.17, y: -38.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4264,20 +4264,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a281c5c20927f044383864b926182c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineOfSight: {x: 50, y: 10}
+  fieldOfViewRadius: 15
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  attackCooldown: 1
-  groundTrapPrefab: {fileID: 1293042409640175261, guid: 5721c22e22a01f6498b2208900be155a, type: 3}
-  trapDelay: 0.5
-  laserPrefab: {fileID: 5425723996491556576, guid: 3e34f1ac20021b840ae1b3942e7a4d51, type: 3}
+  verticalMovementRange: 1
+  verticalMovementSpeed: 0.5
+  teleportInterval: 3
+  teleportOffsetX: 2
+  attackInterval: 1
+  rainStarPrefab: {fileID: 2620448700634441152, guid: 4b931175e7a4a764cbd46198246c3701, type: 3}
+  ivyTrapPrefab: {fileID: 1293042409640175261, guid: 5721c22e22a01f6498b2208900be155a, type: 3}
+  laserBeamPrefab: {fileID: 5425723996491556576, guid: 3e34f1ac20021b840ae1b3942e7a4d51, type: 3}
   firePoint: {fileID: 2062578474}
-  laserSpeed: 5
-  rainProjectilePrefab: {fileID: 2620448700634441152, guid: 4b931175e7a4a764cbd46198246c3701, type: 3}
-  numberOfDrops: 5
-  spreadRange: 5
-  dropHeight: 6
+  laserFrames: 25
 --- !u!114 &434941380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17174,6 +17174,10 @@ PrefabInstance:
     - target: {fileID: 1678341880447869619, guid: 12bab64aa1102314baab75a5e97cb528, type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4308250691802565577, guid: 12bab64aa1102314baab75a5e97cb528, type: 3}
+      propertyPath: fireRate
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4500828953366391865, guid: 12bab64aa1102314baab75a5e97cb528, type: 3}
       propertyPath: m_LocalPosition.x
