@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 10
+  jumpForce: 8
   facingDirection: 1
   firePoint: {fileID: 7074466745425179838}
   playerId: 2
