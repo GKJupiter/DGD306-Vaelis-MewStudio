@@ -522,10 +522,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1644643014}
   - {fileID: 442816406}
   - {fileID: 2032046487}
   - {fileID: 1971464259}
+  - {fileID: 1644643014}
   m_Father: {fileID: 99934427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &253887376
@@ -2431,8 +2431,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 659.3, y: -301}
-  m_SizeDelta: {x: 600, y: 480}
+  m_AnchoredPosition: {x: 238, y: -121}
+  m_SizeDelta: {x: 1280, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1971464260
 MonoBehaviour:
@@ -2483,6 +2483,7 @@ GameObject:
   - component: {fileID: 2032046487}
   - component: {fileID: 2032046489}
   - component: {fileID: 2032046488}
+  - component: {fileID: 2032046490}
   m_Layer: 5
   m_Name: woman
   m_TagString: Untagged
@@ -2506,8 +2507,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -659, y: 299}
-  m_SizeDelta: {x: 600, y: 480}
+  m_AnchoredPosition: {x: -211, y: 119}
+  m_SizeDelta: {x: 1280, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2032046488
 MonoBehaviour:
@@ -2547,6 +2548,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032046486}
   m_CullTransparentMesh: 1
+--- !u!95 &2032046490
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032046486}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2066275649
 GameObject:
   m_ObjectHideFlags: 0
