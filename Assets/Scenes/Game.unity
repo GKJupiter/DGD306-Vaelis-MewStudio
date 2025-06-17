@@ -9879,7 +9879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 10
+  jumpForce: 5
   facingDirection: 1
   firePoint: {fileID: 0}
   playerId: 1
