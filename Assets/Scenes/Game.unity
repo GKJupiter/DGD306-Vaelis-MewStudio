@@ -3664,9 +3664,10 @@ GameObject:
   - component: {fileID: 434941378}
   - component: {fileID: 434941377}
   - component: {fileID: 434941380}
-  m_Layer: 0
+  - component: {fileID: 434941381}
+  m_Layer: 8
   m_Name: CatMage
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3843,8 +3844,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34263034ebd803458e6a459906602ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 50
   knockbackForce: 5
+--- !u!50 &434941381
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434941373}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &446546517
 GameObject:
   m_ObjectHideFlags: 0
@@ -14875,7 +14903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2062578474}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -15419,7 +15447,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 619394802}
-  - {fileID: 434941375}
   - {fileID: 1921362218}
   - {fileID: 2052020766}
   - {fileID: 1706036213}
@@ -15440,6 +15467,7 @@ SceneRoots:
   - {fileID: 357627461}
   - {fileID: 1653583333}
   - {fileID: 1385225630}
+  - {fileID: 434941375}
   - {fileID: 58161537193691624}
   - {fileID: 742585881}
   - {fileID: 851439234}
