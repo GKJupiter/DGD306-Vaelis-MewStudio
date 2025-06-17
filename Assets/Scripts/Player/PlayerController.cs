@@ -29,12 +29,12 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""046cb650-1f73-484a-88ba-67c533d0a609"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Jump"",
@@ -58,6 +58,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""name"": ""Stand"",
                     ""type"": ""Button"",
                     ""id"": ""884c566c-37cc-495a-9292-d118149c98e1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerJoin"",
+                    ""type"": ""Button"",
+                    ""id"": ""37aabbe6-34cf-4549-8266-5b331970ffbb"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -88,7 +97,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""Keyboard"",
                     ""id"": ""57a28b21-7e3e-4a0e-bd89-ce8da43e48e1"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -145,7 +154,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dd65e342-8930-49c4-b163-a62204467768"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -196,6 +205,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Stand"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""efc5289c-412f-4ed3-a890-e01c6c1b3cd3"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""PlayerJoin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f209c35-0545-4a76-b8a5-b5c1f45d3691"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""PlayerJoin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -231,6 +262,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Stand = m_Player.FindAction("Stand", throwIfNotFound: true);
+        m_Player_PlayerJoin = m_Player.FindAction("PlayerJoin", throwIfNotFound: true);
     }
 
     ~@PlayerController()
@@ -301,6 +333,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Stand;
+    private readonly InputAction m_Player_PlayerJoin;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -309,6 +342,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Stand => m_Wrapper.m_Player_Stand;
+        public InputAction @PlayerJoin => m_Wrapper.m_Player_PlayerJoin;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,6 +364,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Stand.started += instance.OnStand;
             @Stand.performed += instance.OnStand;
             @Stand.canceled += instance.OnStand;
+            @PlayerJoin.started += instance.OnPlayerJoin;
+            @PlayerJoin.performed += instance.OnPlayerJoin;
+            @PlayerJoin.canceled += instance.OnPlayerJoin;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -346,6 +383,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Stand.started -= instance.OnStand;
             @Stand.performed -= instance.OnStand;
             @Stand.canceled -= instance.OnStand;
+            @PlayerJoin.started -= instance.OnPlayerJoin;
+            @PlayerJoin.performed -= instance.OnPlayerJoin;
+            @PlayerJoin.canceled -= instance.OnPlayerJoin;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -387,5 +427,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnStand(InputAction.CallbackContext context);
+        void OnPlayerJoin(InputAction.CallbackContext context);
     }
 }
