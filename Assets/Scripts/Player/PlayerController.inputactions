@@ -218,6 +218,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "bce6f86b-1b84-4ec1-8ecb-4e7308e9c4f2",
+            "actions": [
+                {
+                    "name": "ui movement",
+                    "type": "Value",
+                    "id": "c2cff15a-f88e-4b9f-afca-34fdb6a51ec0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "back",
+                    "type": "Button",
+                    "id": "c9c0d2d6-3ed7-4979-bdf4-6da74e32d34f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "forward",
+                    "type": "Button",
+                    "id": "aad121db-7407-48b5-8cb5-7babdfa40c6d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6124e981-feb6-430d-b503-d8cf87b88a07",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ui movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "163c0f9c-a02d-49ca-bb18-418686df2f07",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "650cd801-d4f4-4359-b7cf-5ab2dd05233c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

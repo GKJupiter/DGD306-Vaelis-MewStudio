@@ -240,6 +240,74 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""bce6f86b-1b84-4ec1-8ecb-4e7308e9c4f2"",
+            ""actions"": [
+                {
+                    ""name"": ""ui movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""c2cff15a-f88e-4b9f-afca-34fdb6a51ec0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""back"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9c0d2d6-3ed7-4979-bdf4-6da74e32d34f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""forward"",
+                    ""type"": ""Button"",
+                    ""id"": ""aad121db-7407-48b5-8cb5-7babdfa40c6d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6124e981-feb6-430d-b503-d8cf87b88a07"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""ui movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""163c0f9c-a02d-49ca-bb18-418686df2f07"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""650cd801-d4f4-4359-b7cf-5ab2dd05233c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""forward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -274,11 +342,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Stand = m_Player.FindAction("Stand", throwIfNotFound: true);
         m_Player_PlayerJoin = m_Player.FindAction("PlayerJoin", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_uimovement = m_UI.FindAction("ui movement", throwIfNotFound: true);
+        m_UI_back = m_UI.FindAction("back", throwIfNotFound: true);
+        m_UI_forward = m_UI.FindAction("forward", throwIfNotFound: true);
     }
 
     ~@PlayerController()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerController.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerController.UI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -414,6 +488,68 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_uimovement;
+    private readonly InputAction m_UI_back;
+    private readonly InputAction m_UI_forward;
+    public struct UIActions
+    {
+        private @PlayerController m_Wrapper;
+        public UIActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @uimovement => m_Wrapper.m_UI_uimovement;
+        public InputAction @back => m_Wrapper.m_UI_back;
+        public InputAction @forward => m_Wrapper.m_UI_forward;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @uimovement.started += instance.OnUimovement;
+            @uimovement.performed += instance.OnUimovement;
+            @uimovement.canceled += instance.OnUimovement;
+            @back.started += instance.OnBack;
+            @back.performed += instance.OnBack;
+            @back.canceled += instance.OnBack;
+            @forward.started += instance.OnForward;
+            @forward.performed += instance.OnForward;
+            @forward.canceled += instance.OnForward;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @uimovement.started -= instance.OnUimovement;
+            @uimovement.performed -= instance.OnUimovement;
+            @uimovement.canceled -= instance.OnUimovement;
+            @back.started -= instance.OnBack;
+            @back.performed -= instance.OnBack;
+            @back.canceled -= instance.OnBack;
+            @forward.started -= instance.OnForward;
+            @forward.performed -= instance.OnForward;
+            @forward.canceled -= instance.OnForward;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -439,5 +575,11 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnStand(InputAction.CallbackContext context);
         void OnPlayerJoin(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnUimovement(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
+        void OnForward(InputAction.CallbackContext context);
     }
 }
