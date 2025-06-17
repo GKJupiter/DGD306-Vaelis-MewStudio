@@ -130,7 +130,9 @@ public class PlayerMovement : MonoBehaviour
     // Handles collision with ground to determine if the player is grounded
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        // IMPORTANT: Added null check for collision.gameObject
+        // This prevents NullReferenceException if the GameObject somehow doesn't exist.
+        if (collision != null && collision.gameObject != null && collision.gameObject.CompareTag("Ground"))
         {
             groundCounter++;
             isGrounded = true;
@@ -141,7 +143,8 @@ public class PlayerMovement : MonoBehaviour
     // Handles exiting collision with ground
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        // IMPORTANT: Added null check for collision.gameObject
+        if (collision != null && collision.gameObject != null && collision.gameObject.CompareTag("Ground"))
         {
             groundCounter--;
             if (groundCounter <= 0) // Only set to not grounded if no more ground contacts
