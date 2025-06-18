@@ -2656,9 +2656,9 @@ MonoBehaviour:
   main: {fileID: 218700585}
   credits: {fileID: 1249087190}
   settings: {fileID: 510627768}
-  main_FirstSelectedButton: {fileID: 0}
-  settings_BackButton: {fileID: 0}
-  credits_BackButton: {fileID: 0}
+  main_FirstSelectedButton: {fileID: 253887378}
+  settings_BackButton: {fileID: 162531474}
+  credits_BackButton: {fileID: 1637123880}
 --- !u!114 &2066275654
 MonoBehaviour:
   m_ObjectHideFlags: 0
