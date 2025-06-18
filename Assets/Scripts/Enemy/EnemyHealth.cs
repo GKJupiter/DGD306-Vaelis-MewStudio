@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Add this line
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -36,6 +37,15 @@ public class EnemyHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log(gameObject.name + " died!");
+
+        // Check if the dying enemy is the CatMage
+        if (gameObject.name == "CatMage")
+        {
+            Debug.Log("CatMage died! Loading next scene...");
+            // Replace "YourNextSceneName" with the actual name of the scene you want to load
+            SceneManager.LoadScene("EndingCutscene"); // IMPORTANT: Make sure this scene is added to Build Settings!
+        }
+
         Destroy(gameObject);
     }
 }
