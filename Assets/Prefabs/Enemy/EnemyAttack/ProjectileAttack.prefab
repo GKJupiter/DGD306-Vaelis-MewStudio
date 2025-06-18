@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4099836301731712264}
   - component: {fileID: 456645503640528923}
   - component: {fileID: 5509051680078701192}
+  - component: {fileID: 4182329233895965063}
   m_Layer: 8
   m_Name: ProjectileAttack
   m_TagString: Enemy
@@ -184,3 +185,16 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &4182329233895965063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5425723996491556576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f8f2190828e854c907af91b5635fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 1
