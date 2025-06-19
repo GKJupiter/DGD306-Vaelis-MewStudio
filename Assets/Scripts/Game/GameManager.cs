@@ -32,6 +32,14 @@ public class GameManager : MonoBehaviour
         deadPlayersCount = 0;
     }
 
+    void Update()
+    {
+        if (deadPlayersCount == 2)
+        {
+            ReloadCurrentScene();    
+        }
+    }
+
     // This method is called by a PlayerHealth script when a player dies
     public void PlayerDied()
     {
