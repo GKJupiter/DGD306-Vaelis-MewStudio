@@ -3725,6 +3725,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &395276472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 395276473}
+  m_Layer: 0
+  m_Name: Player Respawn Locations
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &395276473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395276472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 632808483}
+  - {fileID: 910458438}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &416586076
 GameObject:
   m_ObjectHideFlags: 0
@@ -5838,6 +5871,37 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &632808482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 632808483}
+  m_Layer: 0
+  m_Name: player1respawnloc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &632808483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632808482}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -31.3, y: -18.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 395276473}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &638247866
 GameObject:
   m_ObjectHideFlags: 0
@@ -8510,6 +8574,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &910458437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910458438}
+  m_Layer: 0
+  m_Name: player2respawnloc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &910458438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910458437}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -28.1, y: -18.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 395276473}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &911305280
 GameObject:
   m_ObjectHideFlags: 0
@@ -10663,6 +10758,17 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1185332231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9197219350870514615, guid: 12bab64aa1102314baab75a5e97cb528, type: 3}
+  m_PrefabInstance: {fileID: 58161537193691624}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185332221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be05a90f5d1e7649ad1ad0dcde62455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1202601378
 GameObject:
   m_ObjectHideFlags: 0
@@ -15474,9 +15580,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd99c450c5432646a3437ea2fb48596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersHealth: []
-  player1RespawnPoint: {fileID: 0}
-  player2RespawnPoint: {fileID: 0}
+  playersHealth:
+  - {fileID: 1185332231}
+  - {fileID: 5171179863317118565, guid: e3632ecd8adf7704eb639633cc791d67, type: 3}
+  player1RespawnPoint: {fileID: 632808483}
+  player2RespawnPoint: {fileID: 910458438}
 --- !u!1 &1858250692
 GameObject:
   m_ObjectHideFlags: 0
@@ -18035,3 +18143,4 @@ SceneRoots:
   - {fileID: 1843863254}
   - {fileID: 468114493}
   - {fileID: 1814886056}
+  - {fileID: 395276473}
