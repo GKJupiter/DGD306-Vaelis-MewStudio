@@ -21,6 +21,18 @@ public class PlayerHealth : MonoBehaviour
         {
             gameManager = FindObjectOfType<GameManager>();
         }
+        if (HealthBar == null)
+        {
+            GameObject foundHealthBar = GameObject.Find("SeleneHealthBar");
+            if (foundHealthBar != null)
+            {
+                HealthBar = foundHealthBar.GetComponent<Image>();
+            }
+            else
+            {
+                Debug.LogWarning("SeleneHealthBar not found in the scene.");
+            }
+        }
         
     }
 
