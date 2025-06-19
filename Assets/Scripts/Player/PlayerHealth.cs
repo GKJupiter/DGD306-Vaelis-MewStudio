@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public Image HealthBar;
-    public int maxHealth = 100;
-    private int currentHealth;
+    [SerializeField] private float maxHealth = 100;
+    [SerializeField] private float currentHealth;
     public bool isDead = false;
 
     // Optional: Reference to the GameManager
@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
         {
             gameManager = FindObjectOfType<GameManager>();
         }
-
+        
     }
 
     public void TakeDamage(int damage)
